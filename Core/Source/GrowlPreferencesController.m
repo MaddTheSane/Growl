@@ -528,6 +528,22 @@ unsigned short GrowlPreferencesController_unsignedShortForKey(CFTypeRef key)
 	[self setBool:enabled forKey:GrowlEnableForwardKey];
 }
 
+#pragma mark Subscriptions
+
+- (BOOL) isSubscriptionAllowed{
+   return [self boolForKey:GrowlSubscriptionEnabledKey];
+}
+- (void) setSubscriptionAllowed:(BOOL)allowed{
+   [self setBool:allowed forKey:GrowlSubscriptionEnabledKey];
+}
+
+- (NSString*) GNTPSubscriberID{
+   return [self objectForKey:@"GNTPSubscriberID"];
+}
+- (void) setGNTPSubscriberID:(NSString*)newID{
+   [self setObject:newID forKey:@"GNTPSubscriberID"];
+}
+
 #pragma mark -
 /*
  * @brief Growl preferences changed

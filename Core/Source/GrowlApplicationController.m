@@ -32,9 +32,14 @@
 #import "GrowlImageAdditions.h"
 #import "GrowlFirstLaunchWindowController.h"
 #import "GrowlPreferencePane.h"
+#import "GrowlApplicationsViewController.h"
+#import "GrowlDisplaysViewController.h"
+#import "GrowlServerViewController.h"
 #import "GrowlNotificationHistoryWindow.h"
 #import "GrowlKeychainUtilities.h"
 #import "GNTPForwarder.h"
+#import "GNTPSubscriptionController.h"
+#import "GrowlNetworkObserver.h"
 #include "CFURLAdditions.h"
 #include <sys/errno.h>
 #include <string.h>
@@ -106,7 +111,6 @@ static struct Version version = { 0U, 0U, 0U, releaseType_svn, 0U, };
 
 - (id) init {
 	if ((self = [super init])) {
-      [GNTPForwarder sharedController];
 	}
 
 	return self;
@@ -134,6 +138,107 @@ static struct Version version = { 0U, 0U, 0U, releaseType_svn, 0U, };
 	[growlNotificationCenter           release]; growlNotificationCenter = nil;
 	
 	[super dealloc];
+}
+
+- (void) applicationWillFinishLaunching:(NSNotification *)notification {
+    
+    BOOL printVersionAndExit = [[NSUserDefaults standardUserDefaults] boolForKey:@"PrintVersionAndExit"];
+	if (printVersionAndExit) {
+		printf("This is GrowlHelperApp version %s.\n"
+			   "PrintVersionAndExit was set to %hhi, so GrowlHelperApp will now exit.\n",
+			   [[self stringWithVersionDictionary:nil] UTF8String],
+			   printVersionAndExit);
+		[NSApp terminate:nil];
+	}
+    
+	NSFileManager *fs = [NSFileManager defaultManager];
+    
+	NSString *destDir, *subDir;
+	NSArray *searchPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, /*expandTilde*/ YES);
+    
+	destDir = [searchPath objectAtIndex:0U]; //first == last == ~/Library
+	destDir = [destDir stringByAppendingPathComponent:@"Application Support"];
+	destDir = [destDir stringByAppendingPathComponent:@"Growl"];
+    
+	subDir  = [destDir stringByAppendingPathComponent:@"Tickets"];
+	[fs createDirectoryAtPath:subDir withIntermediateDirectories:YES attributes:nil error:nil];
+	subDir  = [destDir stringByAppendingPathComponent:@"Plugins"];
+	[fs createDirectoryAtPath:subDir withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    // initialize GrowlPreferencesController before observing GrowlPreferencesChanged
+    GrowlPreferencesController *preferences = [GrowlPreferencesController sharedController];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    
+    [nc addObserver:self
+           selector:@selector(preferencesChanged:)
+               name:GrowlPreferencesChanged
+             object:nil];
+    [nc addObserver:self
+           selector:@selector(showPreview:)
+               name:GrowlPreview
+             object:nil];
+    [nc addObserver:self
+           selector:@selector(replyToPing:)
+               name:GROWL_PING
+             object:nil];
+    
+    [nc addObserver:self
+           selector:@selector(notificationClicked:)
+               name:GROWL_NOTIFICATION_CLICKED
+             object:nil];
+    [nc addObserver:self
+           selector:@selector(notificationTimedOut:)
+               name:GROWL_NOTIFICATION_TIMED_OUT
+             object:nil];
+    
+    ticketController = [GrowlTicketController sharedController];
+    
+    [self versionDictionary];
+    
+    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"GrowlDefaults" withExtension:@"plist"];
+    NSDictionary *defaultDefaults = [NSDictionary dictionaryWithContentsOfURL:fileURL];
+    if (defaultDefaults) {
+        [preferences registerDefaults:defaultDefaults];
+    }
+    
+    //This class doesn't exist in the prefpane.
+    Class pathwayControllerClass = NSClassFromString(@"GrowlPathwayController");
+    if (pathwayControllerClass)
+        [pathwayControllerClass sharedController];
+    
+    [self preferencesChanged:nil];
+    
+    [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self
+                                                           selector:@selector(applicationLaunched:)
+                                                               name:NSWorkspaceDidLaunchApplicationNotification
+                                                             object:nil];
+    
+    growlIcon = [[NSImage imageNamed:@"NSApplicationIcon"] retain];
+    
+    GrowlIdleStatusController_init();
+    
+    // create and register GrowlNotificationCenter
+    growlNotificationCenter = [[GrowlNotificationCenter alloc] init];
+    growlNotificationCenterConnection = [[NSConnection alloc] initWithReceivePort:[NSPort port] sendPort:nil];
+    //[growlNotificationCenterConnection enableMultipleThreads];
+    [growlNotificationCenterConnection setRootObject:growlNotificationCenter];
+    if (![growlNotificationCenterConnection registerName:@"GrowlNotificationCenter"])
+        NSLog(@"WARNING: could not register GrowlNotificationCenter for interprocess access");
+    
+    [[GrowlNotificationDatabase sharedInstance] setupMaintenanceTimers];
+    
+    [[GrowlNetworkObserver sharedObserver] startObserving];
+    [[GrowlNetworkObserver sharedObserver] updateAddresses];
+    
+    [[GNTPForwarder sharedController] addObservers];
+    [[GNTPSubscriptionController sharedController] addObservers];
+    
+    NSAppleEventManager *appleEventManager = [NSAppleEventManager sharedAppleEventManager];
+    [appleEventManager setEventHandler:self 
+                           andSelector:@selector(handleGetURLEvent:withReplyEvent:) 
+                         forEventClass:kInternetEventClass 
+                            andEventID:kAEGetURL];
 }
 
 #pragma mark Guts
@@ -292,6 +397,12 @@ static struct Version version = { 0U, 0U, 0U, releaseType_svn, 0U, };
         
         [[GrowlNotificationDatabase sharedInstance] logNotificationWithDictionary:aDict];
         
+        if([preferences isForwardingEnabled])
+            [[GNTPForwarder sharedController] forwardNotification:[[dict copy] autorelease]];
+        
+        [[GNTPSubscriptionController sharedController] forwardNotification:[[dict copy] autorelease]];
+        
+        
    		if([preferences isForwardingEnabled])
       		[[GNTPForwarder sharedController] forwardNotification:[[dict copy] autorelease]];
         
@@ -358,7 +469,7 @@ static struct Version version = { 0U, 0U, 0U, releaseType_svn, 0U, };
         
         [aDict release];
     }
-	
+    
 	//NSLog(@"Notification successful");
 	return GrowlNotificationResultPosted;
 }
@@ -611,6 +722,71 @@ static struct Version version = { 0U, 0U, 0U, releaseType_svn, 0U, };
    }
 }
 
+- (void)handleGetURLEvent:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent
+{
+   NSString *url = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+   if(!url || [url isEqualToString:@""])
+      return;
+   if(![url hasPrefix:@"growl://"])
+      return;
+   
+   NSString *shortened = [url stringByReplacingOccurrencesOfString:@"growl://" withString:@""];
+   NSArray *components = [shortened componentsSeparatedByString:@"/"];
+   if([components count] == 0)
+      return;
+   
+   GrowlPreferencesController *preferences = [GrowlPreferencesController sharedController];
+   if([[components objectAtIndex:0] caseInsensitiveCompare:@"preferences"] == NSOrderedSame){
+      [self showPreferences];
+      if([components count] > 1){
+         NSString *tab = [components objectAtIndex:1];
+         if([tab caseInsensitiveCompare:@"general"] == NSOrderedSame) {
+            [preferences setSelectedPreferenceTab:0];
+         }else if([tab caseInsensitiveCompare:@"applications"] == NSOrderedSame){
+            [preferences setSelectedPreferenceTab:1];
+            if([components count] > 2){
+               NSString *app = [components objectAtIndex:2];
+               NSString *host = nil;
+               if([components count] > 3 && ![[components objectAtIndex:3] isEqualToString:@""])
+                  host = [components objectAtIndex:3];
+               GrowlApplicationsViewController *appsView = [[preferencesWindow prefViewControllers] valueForKey:[GrowlApplicationsViewController nibName]];
+               [appsView selectApplication:app hostName:host]; 
+            }
+         }else if([tab caseInsensitiveCompare:@"displays"] == NSOrderedSame){
+            [preferences setSelectedPreferenceTab:2];
+            if([components count] > 2){
+               NSString *display = [components objectAtIndex:2];
+               GrowlDisplaysViewController *displaysView = [[preferencesWindow prefViewControllers] valueForKey:[GrowlDisplaysViewController nibName]];
+               [displaysView selectPlugin:display];
+            }
+         }else if([tab caseInsensitiveCompare:@"network"] == NSOrderedSame){
+            [preferences setSelectedPreferenceTab:3];
+            if([components count] > 2){
+               NSString *forwardSubscribe = [components objectAtIndex:2];
+               NSUInteger tabToSelect = NSNotFound;
+               if([forwardSubscribe caseInsensitiveCompare:@"forwarding"] == NSOrderedSame){
+                  tabToSelect = 0;
+               }else if([forwardSubscribe caseInsensitiveCompare:@"subscriptions"] == NSOrderedSame){
+                  tabToSelect = 1;
+               }else if([forwardSubscribe caseInsensitiveCompare:@"subscribers"] == NSOrderedSame){
+                  tabToSelect = 2;
+               }
+               GrowlServerViewController *networkView = [[preferencesWindow prefViewControllers] valueForKey:[GrowlServerViewController nibName]];
+               dispatch_async(dispatch_get_main_queue(), ^{
+                  [networkView showNetworkConnectionTab:tabToSelect];
+               });
+            }
+         }else if([tab caseInsensitiveCompare:@"rollup"] == NSOrderedSame){
+            [preferences setSelectedPreferenceTab:4];
+         }else if([tab caseInsensitiveCompare:@"history"] == NSOrderedSame){
+            [preferences setSelectedPreferenceTab:5];
+         }else if([tab caseInsensitiveCompare:@"about"] == NSOrderedSame){
+            [preferences setSelectedPreferenceTab:6];
+         }
+      }
+   }
+}
+
 #pragma mark NSApplication Delegate Methods
 
 - (NSMenu*)applicationDockMenu:(NSApplication*)app
@@ -672,32 +848,6 @@ static struct Version version = { 0U, 0U, 0U, releaseType_svn, 0U, };
 	}
 
 	return retVal;
-}
-
-- (void) applicationWillFinishLaunching:(NSNotification *)aNotification {
-
-	BOOL printVersionAndExit = [[NSUserDefaults standardUserDefaults] boolForKey:@"PrintVersionAndExit"];
-	if (printVersionAndExit) {
-		printf("This is GrowlHelperApp version %s.\n"
-			   "PrintVersionAndExit was set to %hhi, so GrowlHelperApp will now exit.\n",
-			   [[self stringWithVersionDictionary:nil] UTF8String],
-			   printVersionAndExit);
-		[NSApp terminate:nil];
-	}
-
-	NSFileManager *fs = [NSFileManager defaultManager];
-
-	NSString *destDir, *subDir;
-	NSArray *searchPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, /*expandTilde*/ YES);
-
-	destDir = [searchPath objectAtIndex:0U]; //first == last == ~/Library
-	destDir = [destDir stringByAppendingPathComponent:@"Application Support"];
-	destDir = [destDir stringByAppendingPathComponent:@"Growl"];
-
-	subDir  = [destDir stringByAppendingPathComponent:@"Tickets"];
-	[fs createDirectoryAtPath:subDir withIntermediateDirectories:YES attributes:nil error:nil];
-	subDir  = [destDir stringByAppendingPathComponent:@"Plugins"];
-	[fs createDirectoryAtPath:subDir withIntermediateDirectories:YES attributes:nil error:nil];
 }
 
 #if defined(BETA) && BETA

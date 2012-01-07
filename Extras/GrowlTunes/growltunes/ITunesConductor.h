@@ -8,48 +8,43 @@
 
 #import <Foundation/Foundation.h>
 #import <ScriptingBridge/ScriptingBridge.h>
+#import "macros.h"
 #import "iTunes.h"
-
-
-#define StateStopped iTunesEPlSStopped
-#define StatePlaying iTunesEPlSPlaying
-#define StatePaused iTunesEPlSPaused
-#define StateFastForward iTunesEPlSFastForwarding
-#define StateRewind iTunesEPlSRewinding
-
-#define RENOTIFY_STREAM_KEY @"ReNotifyOnStreamingTrackChange"
-
-#define ITUNES_BUNDLE_ID @"com.apple.iTunes"
-#define PLAYER_INFO_ID ITUNES_BUNDLE_ID ".playerInfo"
-#define SOURCE_SAVED_ID ITUNES_BUNDLE_ID ".sourceSaved"
-
-#define NotifierChangedTracks           @"Changed Tracks"
-#define NotifierPaused                  @"Paused"
-#define NotifierStopped                 @"Stopped"
-#define NotifierStarted                 @"started"
-
-#define NotifierChangedTracksReadable   NSLocalizedString(@"Changed Tracks", nil)
-#define NotifierPausedReadable          NSLocalizedString(@"Paused", nil)
-#define NotifierStoppedReadable         NSLocalizedString(@"Stopped", nil)
-#define NotifierStartedReadable         NSLocalizedString(@"Started", nil)
-
+#import "iTunes+iTunesAdditions.h"
+#import "TrackMetadata.h"
 
 @interface ITunesConductor : NSObject <SBApplicationDelegate> {
     @private
     
-    iTunesApplication* _iTunes;
     BOOL _running;
-    NSInteger _trackID;
-    iTunesEPlS _playerState;
-    NSMutableDictionary* _itemData;
+    TrackMetadata* _metaTrack;
+    TrackMetadata* _currentTrack;
+    NSString* _currentPersistentID;
+    ITunesEPlS _currentPlayerState;
 }
 
-@property(readonly, nonatomic, assign, getter = isRunning) BOOL running;
-@property(readonly, nonatomic, assign) iTunesEPlS playerState;
-@property(readonly, nonatomic, copy) NSDictionary* itemData;
+@property(readonly, nonatomic, assign) BOOL isRunning;
+@property(readonly, nonatomic, assign) BOOL isPlaying;
+@property(readonly, nonatomic, assign) BOOL isPaused;
+@property(readonly, nonatomic, assign) BOOL isStopped;
+@property(readonly, nonatomic, assign) BOOL isFastForwarding;
+@property(readonly, nonatomic, assign) BOOL isRewinding;
+@property(readonly, nonatomic, assign) BOOL isFrontmost;
+@property(readonly, nonatomic, assign) ITunesEPlS currentPlayerState;
+@property(readonly, nonatomic, retain) NSString* currentPersistentID;
+@property(readonly, nonatomic, retain) TrackMetadata* currentTrack;
 
-+ (void)setLogLevel:(int)level;
-+ (int)logLevel;
-- (BOOL)running;
+@property(readwrite, nonatomic, retain) NSNumber* volume;
+
+- (void)bootstrap;
+
+- (IBAction)playPause:(id)sender;
+- (IBAction)nextTrack:(id)sender;
+- (IBAction)previousTrack:(id)sender;
+
+- (IBAction)run:(id)sender;
+- (IBAction)quit:(id)sender;
+
+- (IBAction)activate:(id)sender;
 
 @end

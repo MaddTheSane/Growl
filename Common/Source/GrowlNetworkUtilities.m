@@ -8,6 +8,7 @@
 
 #import "GrowlNetworkUtilities.h"
 #import "NSStringAdditions.h"
+#import "GrowlDefinesInternal.h"
 
 #import <SystemConfiguration/SystemConfiguration.h>
 #include <netinet/in.h>
@@ -28,6 +29,45 @@
       }
    }
    return hostname;
+}
+
++(NSData*)addressData:(NSData*)original coercedToPort:(NSInteger)port {
+   NSData *result = nil;
+	if ([original length] >= sizeof(struct sockaddr))
+	{
+		struct sockaddr *addrX = (struct sockaddr *)[original bytes];
+		
+		if (addrX->sa_family == AF_INET)
+		{
+			if ([original length] >= sizeof(struct sockaddr_in))
+			{
+            struct sockaddr_in *inAddr4 = (struct sockaddr_in *)addrX;
+				struct sockaddr_in addr4;
+				memset(&addr4, 0, sizeof(addr4));
+            addr4.sin_len = sizeof(struct sockaddr_in);
+            addr4.sin_family = AF_INET;
+            addr4.sin_addr.s_addr = inAddr4->sin_addr.s_addr;
+				addr4.sin_port = htons(port);
+            result = [NSData dataWithBytes:&addr4 length:sizeof(addr4)];
+         }
+		}
+		else if (addrX->sa_family == AF_INET6)
+		{
+			if ([original length] >= sizeof(struct sockaddr_in6))
+			{
+				struct sockaddr_in6 *inAddr6 = (struct sockaddr_in6 *)addrX;
+				struct sockaddr_in6 addr6;
+				memset(&addr6, 0, sizeof(addr6));
+            addr6.sin6_len = sizeof(struct sockaddr_in6);
+            addr6.sin6_family = AF_INET6;
+            addr6.sin6_addr = inAddr6->sin6_addr;
+				addr6.sin6_port = htons(port);
+            result = [NSData dataWithBytes:&addr6 length:sizeof(addr6)];
+			}
+		}
+	}
+   
+   return result;
 }
 
 + (NSData *)addressDataForGrowlServerOfType:(NSString *)type withName:(NSString *)name withDomain:(NSString*)domain

@@ -26,6 +26,8 @@
     IBOutlet NSToolbar              *toolbar;
    NSMutableDictionary              *prefViewControllers;
    GrowlPrefsViewController         *currentViewController;
+   
+   BOOL firstOpen;
 }
 
 - (NSString *) bundleVersion;
@@ -45,8 +47,8 @@
 -(void) populateDisplaysPopUpButton:(NSPopUpButton *)popUp nameOfSelectedDisplay:(NSString *)nameOfSelectedDisplay includeDefaultMenuItem:(BOOL)includeDefault;
 
 #pragma mark Properties
-@property (retain) NSMutableArray *services;
 @property (retain) NSString *networkAddressString;
 @property (retain) GrowlPrefsViewController *currentViewController;
+@property (retain) NSMutableDictionary *prefViewControllers;
 
 @end
