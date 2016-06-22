@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
+	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.growl.soundaction</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -20,15 +20,15 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>GrowlPluginDescription</key>
-	<string>A plugin which plays sounds upon notes</string>
 	<key>GrowlPluginAuthor</key>
 	<string>The Growl Project, LLC</string>
+	<key>GrowlPluginDescription</key>
+	<string>A plugin which plays sounds upon notes</string>
+	<key>GrowlPluginsFrameworkVersion</key>
+	<string>1.0</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2012 The Growl Project, LLC. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
 	<string>GrowlSoundAction</string>
-	<key>GrowlPluginsFrameworkVersion</key>
-	<string>1.0</string>
 </dict>
 </plist>

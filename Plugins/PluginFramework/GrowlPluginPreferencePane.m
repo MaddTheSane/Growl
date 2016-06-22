@@ -8,6 +8,10 @@
 
 #import <GrowlPlugins/GrowlPluginPreferencePane.h>
 
+@interface NSObject (BindingKeys)
+- (NSSet*)bindingKeys;
+@end
+
 @interface GrowlPluginPreferencePane ()
 
 @property (nonatomic, retain) NSManagedObject *pluginConfiguration;

@@ -51,7 +51,6 @@ static NSTimeInterval currentIdleTime(void) {
 @synthesize useTime;
 @synthesize applicationExceptions;
 
-@synthesize isIdle;
 @synthesize screensaverActive;
 @synthesize screenLocked;
 @synthesize asleep;

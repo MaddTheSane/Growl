@@ -7,7 +7,14 @@
 //
 
 #import <GrowlPlugins/GrowlNotificationView.h>
+#import <GrowlPlugins/GrowlDisplayWindowController.h>
 #import "GrowlDefinesInternal.h"
+
+@interface GrowlDisplayWindowController (private)
+- (void) clickedCloseBox;
+- (void) mouseEnteredNotificationView:(GrowlNotificationView *)notificationView;
+- (void) mouseExitedNotificationView:(GrowlNotificationView *)notificationView;
+@end
 
 @implementation GrowlNotificationView
 
@@ -55,7 +62,8 @@
 	return YES;
 }
 
-- (void) mouseEntered:(NSEvent *)theEvent {
+
+- (void) mouseEntered {
     [self setCloseBoxVisible:YES];
 	mouseOver = YES;
 	[self setNeedsDisplay:YES];
@@ -63,6 +71,10 @@
 	if ([[[self window] windowController] respondsToSelector:@selector(mouseEnteredNotificationView:)])
 		[[[self window] windowController] performSelector:@selector(mouseEnteredNotificationView:)
 											   withObject:self];
+}
+
+- (void) mouseEntered:(NSEvent *)theEvent {
+	[self mouseEntered];
 }
 
 - (void) mouseExited:(NSEvent *)theEvent {
@@ -192,8 +204,9 @@ static NSButton *gCloseButton = nil;
 {
 	if(!initialDisplayTest) {
 		initialDisplayTest = YES;
-		if([self showsCloseBox] && NSPointInRect([[self window] convertScreenToBase:[NSEvent mouseLocation]], [self frame]))
-			[self mouseEntered:nil];
+		NSPoint event_location = [NSEvent mouseLocation];
+		if([self showsCloseBox] && NSMouseInRect([self convertPoint:event_location fromView:nil], [self frame], NO))
+			[self mouseEntered];
 	}
 	[super drawRect:rect];
 }

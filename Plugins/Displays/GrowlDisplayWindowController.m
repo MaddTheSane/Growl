@@ -664,7 +664,7 @@ static NSMutableDictionary *existingInstances;
 					   name:GrowlDisplayWindowControllerDidDisplayWindowNotification
 					 object:self];
 
-		if ([observer respondsToSelector:@selector(displayWindowControllerWillTakeDownWindow:)])
+		if ([observer respondsToSelector:@selector(displayWindowControllerWillTakeWindowDown:)])
 			[nc addObserver:observer
 				   selector:@selector(displayWindowControllerWillTakeWindowDown:)
 					   name:GrowlDisplayWindowControllerWillTakeWindowDownNotification
