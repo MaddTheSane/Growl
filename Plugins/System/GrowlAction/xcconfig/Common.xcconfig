@@ -8,4 +8,4 @@
 
 #include "../../../../xcconfig/Common.xcconfig"
 
-GCC_ENABLE_OBJC_GC = supported
+GCC_ENABLE_OBJC_GC = unsupported

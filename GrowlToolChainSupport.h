@@ -15,6 +15,6 @@
 #pragma message(GROWL_ACCEPTED)
 #pragma message(GROWL_FOUND)
 
-#error Growl requires a specific toolchain in order to build. you're more than welcome to comment this out in order to attempt building with the toolchain you have. We don't accept patches against the released versions as they are frozen in time.
+//#warning Growl requires a specific toolchain in order to build. you're more than welcome to comment this out in order to attempt building with the toolchain you have. We don't accept patches against the released versions as they are frozen in time.
     #endif
 #endif

@@ -22,10 +22,10 @@
 	};
 	NSString *versionString = [NSMakeCollectable(createVersionDescription(version)) autorelease];
 
-	STAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
+	XCTAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
 
 	NSString *correctVersionString = @"1.3hg4000";
-	STAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
+	XCTAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
 }
 - (void) testUnparsingTwoComponentDevelopmentVersion {
 	struct Version version = {
@@ -37,10 +37,10 @@
 	};
 	NSString *versionString = [NSMakeCollectable(createVersionDescription(version)) autorelease];
 
-	STAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
+	XCTAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
 
 	NSString *correctVersionString = @"1.3d7";
-	STAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
+	XCTAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
 }
 - (void) testUnparsingTwoComponentAlphaVersion {
 	struct Version version = {
@@ -52,10 +52,10 @@
 	};
 	NSString *versionString = [NSMakeCollectable(createVersionDescription(version)) autorelease];
 
-	STAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
+	XCTAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
 
 	NSString *correctVersionString = @"1.3a7";
-	STAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
+	XCTAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
 }
 - (void) testUnparsingTwoComponentBetaVersion {
 	struct Version version = {
@@ -67,10 +67,10 @@
 	};
 	NSString *versionString = [NSMakeCollectable(createVersionDescription(version)) autorelease];
 
-	STAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
+	XCTAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
 
 	NSString *correctVersionString = @"1.3b7";
-	STAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
+	XCTAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
 }
 - (void) testUnparsingTwoComponentReleaseVersion {
 	struct Version version = {
@@ -82,10 +82,10 @@
 	};
 	NSString *versionString = [NSMakeCollectable(createVersionDescription(version)) autorelease];
 
-	STAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
+	XCTAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
 
 	NSString *correctVersionString = @"1.3";
-	STAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
+	XCTAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
 }
 
 - (void) testUnparsingThreeComponentHgVersion {
@@ -98,10 +98,10 @@
 	};
 	NSString *versionString = [NSMakeCollectable(createVersionDescription(version)) autorelease];
 
-	STAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
+	XCTAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
 
 	NSString *correctVersionString = @"1.3.5hg4000";
-	STAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
+	XCTAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
 }
 - (void) testUnparsingThreeComponentDevelopmentVersion {
 	struct Version version = {
@@ -113,10 +113,10 @@
 	};
 	NSString *versionString = [NSMakeCollectable(createVersionDescription(version)) autorelease];
 
-	STAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
+	XCTAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
 
 	NSString *correctVersionString = @"1.3.5d7";
-	STAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
+	XCTAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
 }
 - (void) testUnparsingThreeComponentAlphaVersion {
 	struct Version version = {
@@ -128,10 +128,10 @@
 	};
 	NSString *versionString = [NSMakeCollectable(createVersionDescription(version)) autorelease];
 
-	STAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
+	XCTAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
 
 	NSString *correctVersionString = @"1.3.5a7";
-	STAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
+	XCTAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
 }
 - (void) testUnparsingThreeComponentBetaVersion {
 	struct Version version = {
@@ -143,10 +143,10 @@
 	};
 	NSString *versionString = [NSMakeCollectable(createVersionDescription(version)) autorelease];
 
-	STAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
+	XCTAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
 
 	NSString *correctVersionString = @"1.3.5b7";
-	STAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
+	XCTAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
 }
 - (void) testUnparsingThreeComponentReleaseVersion {
 	struct Version version = {
@@ -158,10 +158,10 @@
 	};
 	NSString *versionString = [NSMakeCollectable(createVersionDescription(version)) autorelease];
 
-	STAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
+	XCTAssertNotNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned nil", version.major, version.minor, version.incremental, version.releaseType, version.development);
 
 	NSString *correctVersionString = @"1.3.5";
-	STAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
+	XCTAssertEqualObjects(versionString, correctVersionString, @"Version string for %@ was %@", correctVersionString, versionString);
 }
 
 - (void) testUnparsingVersionWithBogusReleaseType {
@@ -174,7 +174,7 @@
 	};
 	NSString *versionString = [NSMakeCollectable(createVersionDescription(version)) autorelease];
 
-	STAssertNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned %@", version.major, version.minor, version.incremental, version.releaseType, version.development, versionString);
+	XCTAssertNil(versionString, @"createVersionDescription((struct Version){ %hu, %hu, %hhu, %hhu, %hhu }) returned %@", version.major, version.minor, version.incremental, version.releaseType, version.development, versionString);
 }
 
 @end

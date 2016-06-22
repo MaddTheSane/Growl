@@ -6,9 +6,9 @@
 //  Copyright 2010 The Growl Project. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface TestProcessUtilities : SenTestCase
+@interface TestProcessUtilities : XCTestCase
 {}
 
 @end

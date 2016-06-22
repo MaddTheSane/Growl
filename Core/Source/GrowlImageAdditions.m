@@ -30,7 +30,7 @@
 			targetRect.origin.x = GrowlCGFloatFloor(targetRect.origin.x - (targetRect.size.width - oldWidth) * 0.5f);
 		}
 
-		[self setScalesWhenResized:YES];
+		//[self setScalesWhenResized:YES];
 		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
 	} else {
 		// center image if it is too small
@@ -101,9 +101,9 @@
 	CGImageDestinationRef cgDestRef = CGImageDestinationCreateWithData((CFMutableDataRef)mutableData, (CFStringRef)type, 1, NULL);
 	if(cgDestRef)
 	{
-		if([self isFlipped]){
-			[self setFlipped:NO];
-		}
+		//if([self isFlipped]){
+		//	[self setFlipped:NO];
+		//}
 		CGImageRef imageRef = [self CGImageForProposedRect:NULL context:nil hints:nil];
 		if(imageRef)
 		{

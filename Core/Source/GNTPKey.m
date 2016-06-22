@@ -7,7 +7,7 @@
 //
 
 #import "GNTPKey.h"
-#import <openssl/evp.h>
+//#import <openssl/evp.h>
 #import <Security/SecRandom.h>
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonDigest.h>
@@ -356,7 +356,9 @@ NSData *ComputeHash(NSData *data, GrowlGNTPHashingAlgorithm algorithm)
 	NSData *ivData = nil;
 
 	const 
-	EVP_CIPHER *cipher = nil;
+	//EVP_CIPHER *cipher = nil;
+	void *cipher = nil;
+
 	NSInteger blockSize = 0;
 	switch ([self encryptionAlgorithm])
 	{

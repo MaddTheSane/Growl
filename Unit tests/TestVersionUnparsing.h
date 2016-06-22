@@ -6,9 +6,9 @@
 //  Copyright 2009 Peter Hosey. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface TestVersionUnparsing : SenTestCase {
+@interface TestVersionUnparsing : XCTestCase {
 
 }
 

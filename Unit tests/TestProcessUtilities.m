@@ -20,14 +20,14 @@
 - (void) testFindingProcessByBundlePath {
 	ProcessSerialNumber finderPSN = { 0, kNoProcess };
 	bool found = Growl_GetPSNForProcessWithBundlePath(FINDER_BUNDLE_PATH, &finderPSN);
-	STAssertTrue(found, @"Failed to find Finder by path");
+	XCTAssertTrue(found, @"Failed to find Finder by path");
 
 	NSDictionary *dict = [NSMakeCollectable(ProcessInformationCopyDictionary(&finderPSN, kProcessDictionaryIncludeAllInformationMask)) autorelease];
-	STAssertNotNil(dict, @"Found Finder by path, but got a bogus PSN: { %u, %u }", finderPSN.highLongOfPSN, finderPSN.lowLongOfPSN);
+	XCTAssertNotNil(dict, @"Found Finder by path, but got a bogus PSN: { %u, %u }", (unsigned int)finderPSN.highLongOfPSN, (unsigned int)finderPSN.lowLongOfPSN);
 }
 - (void) testFindingProcessByBundleID {
 	bool found = Growl_ProcessExistsWithBundleIdentifier(FINDER_BUNDLE_IDENTIFIER);
-	STAssertTrue(found, @"Failed to find Finder by bundle ID");
+	XCTAssertTrue(found, @"Failed to find Finder by bundle ID");
 }
 
 @end

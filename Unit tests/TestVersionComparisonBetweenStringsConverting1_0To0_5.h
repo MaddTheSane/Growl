@@ -6,9 +6,9 @@
 //  Copyright 2009 Peter Hosey. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface TestVersionComparisonBetweenStringsConverting1_0To0_5 : SenTestCase
+@interface TestVersionComparisonBetweenStringsConverting1_0To0_5 : XCTestCase
 {}
 
 - (void) testSVNVersionNewerThanSVNVersion;

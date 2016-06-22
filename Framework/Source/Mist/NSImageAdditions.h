@@ -8,7 +8,9 @@
 
 @interface NSImage (GrowlAdditions)
 
+#if 0
 - (void) drawInRect:(NSRect)rect;
+#endif
 
 - (NSImage *) flippedImage;
 - (NSImage *) imageSizedToDimension:(int)dimension;

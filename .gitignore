@@ -1,4 +1,4 @@
-build
+build/
 *.swp
 
 *.mode1
@@ -8,8 +8,8 @@ build
 *.pbxuser
 *.perspective
 *.perspectivev3
-xcuserdata
-*.xcworkspace
+xcuserdata/
+project.xcworkspace/
 
 *~.nib
 
