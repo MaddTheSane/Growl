@@ -35,12 +35,12 @@
 @synthesize clickShortcut;
 @synthesize voices;
 
-@synthesize useLimit;
-@synthesize characterLimit;
-@synthesize useRate;
-@synthesize rate;
-@synthesize useVolume;
-@synthesize volume;
+@dynamic useLimit;
+@dynamic characterLimit;
+@dynamic useRate;
+@dynamic rate;
+@dynamic useVolume;
+@dynamic volume;
 
 @synthesize voiceLabel;
 @synthesize limitCharCheckboxTitle;

@@ -19,7 +19,7 @@
 
 @implementation GrowlMusicVideoPrefs
 
-@synthesize textAlignment;
+@dynamic textAlignment;
 
 @synthesize justificationLabel;
 @synthesize leftJustification;

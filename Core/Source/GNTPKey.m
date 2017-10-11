@@ -223,7 +223,7 @@ NSData *ComputeHash(NSData *data, GrowlGNTPHashingAlgorithm algorithm)
     buffer = (unsigned char *)calloc(length, sizeof(unsigned char));
     NSAssert((buffer != NULL), @"Cannot calloc memory for buffer.");
     
-    SecRandomCopyBytes(kSecRandomDefault, length, buffer);
+    (void)SecRandomCopyBytes(kSecRandomDefault, length, buffer);
     
     return [NSData dataWithBytesNoCopy:buffer length:length freeWhenDone:YES];;
 }

@@ -10,8 +10,6 @@
 #import "GrowlNanoPrefs.h"
 #import "GrowlImageAdditions.h"
 
-extern CGLayerRef CGLayerCreateWithContext() __attribute__((weak_import));
-
 void addRoundedBottomToPath(CGContextRef context, CGRect rect, CGFloat radius);
 
 
