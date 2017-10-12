@@ -125,7 +125,7 @@ typedef void(^GrowlNoteStatusUpdateBlock)(GrowlNoteStatus status, GrowlNote *not
  *
  *	@since Growl.framework 3.0
  */
--(id)initWithDictionary:(NSDictionary*)dictionary;
+-(instancetype)initWithDictionary:(NSDictionary*)dictionary;
 
 /*!@brief Initialize a notification using a dictionary
  *  requires values for GROWL_NOTIFICATION_NAME and either GROWL_NOTIFICATION_TITLE or GROWL_NOTIFICATION_DESCRIPTION
@@ -135,7 +135,7 @@ typedef void(^GrowlNoteStatusUpdateBlock)(GrowlNoteStatus status, GrowlNote *not
  *
  *	@since Growl.framework 3.0
  */
-+(GrowlNote*)noteWithDictionary:(NSDictionary*)dict;
++(instancetype)noteWithDictionary:(NSDictionary*)dict;
 
 /*!
  *	@abstract Initialize a notification.
@@ -155,30 +155,30 @@ typedef void(^GrowlNoteStatusUpdateBlock)(GrowlNoteStatus status, GrowlNote *not
  * @param cancelButtonTitle a string to use as the cancel button title in NSUserNotificationCenter
  *	@param identifier	An identifier for this notification. Notifications with equal identifiers are coalesced.
  */
--(id)initWithTitle:(NSString *)title
-       description:(NSString *)description
-  notificationName:(NSString *)notifName
-          iconData:(NSData *)iconData
-          priority:(NSInteger)priority
-          isSticky:(BOOL)isSticky
-      clickContext:(id)clickContext
- actionButtonTitle:(NSString *)actionTitle
- cancelButtonTitle:(NSString *)cancelTitle
-        identifier:(NSString *)identifier;
+-(instancetype)initWithTitle:(NSString *)title
+                 description:(NSString *)description
+            notificationName:(NSString *)notifName
+                    iconData:(NSData *)iconData
+                    priority:(NSInteger)priority
+                    isSticky:(BOOL)isSticky
+                clickContext:(id)clickContext
+           actionButtonTitle:(NSString *)actionTitle
+           cancelButtonTitle:(NSString *)cancelTitle
+                  identifier:(NSString *)identifier;
 
 /*!
  * @discussion Returns an autoreleased note, see the initializer for more information
  * @see initWithTitle:description:notificationName:iconData:priority:isSticky:clickContext:actionButtonTitle:cancelButtonTitle:identifier:
  */
-+(GrowlNote*)noteWithTitle:(NSString *)title
-               description:(NSString *)description
-          notificationName:(NSString *)notifName
-                  iconData:(NSData *)iconData
-                  priority:(NSInteger)priority
-                  isSticky:(BOOL)isSticky
-              clickContext:(id)clickContext
-         actionButtonTitle:(NSString *)actionTitle
-         cancelButtonTitle:(NSString *)cancelTitle
-                identifier:(NSString *)identifier;
++(instancetype)noteWithTitle:(NSString *)title
+                 description:(NSString *)description
+            notificationName:(NSString *)notifName
+                    iconData:(NSData *)iconData
+                    priority:(NSInteger)priority
+                    isSticky:(BOOL)isSticky
+                clickContext:(id)clickContext
+           actionButtonTitle:(NSString *)actionTitle
+           cancelButtonTitle:(NSString *)cancelTitle
+                  identifier:(NSString *)identifier;
 
 @end

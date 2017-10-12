@@ -1,1 +1,58 @@
-뼯⨠䱡扥氠景爠牯眠潦⁣潬潲⁷敬汳⁦潲⁴桥⁢慣歧牯畮搠潦⁴桥⁰汵杩渠⨯ਢ䉡捫杲潵湤∠㴠≂慣歧牯畮搢㬊ਯ⨠䡯眠汯湧⁡⁮潴楦楣慴楯渠睩汬⁳瑡礠潮⁳捲敥渠⨯ਢ䑵牡瑩潮㨢‽•䑵牡瑩潮㨢㬊ਯ⨠䱡扥氠景爠瑨攠敦晥捴⁴漠畳攠⨯ਢ䕦晥捴㨢‽•䕦晥捴㨢㬊ਯ⨠乯瑩晩捡瑩潮⁐物潲楴礠䕭敲来湣礠⨯ਢ䕭敲来湣礢‽•䕭敲来湣礢㬊ਯ⨠䄠晡摥⁥晦散琠⨯ਢ䙡摥∠㴠≆慤攢㬊ਯ⨠䱡扥氠景爠捨散止潸⁴桡琠獡祳⁴漠摯⁡⁦汯慴楮朠楣潮‪⼊≆汯慴楮朠䥣潮∠㴠≆汯慴楮朠䥣潮∻ਊ⼪⁎潴楦楣慴楯渠偲楯物瑹⁈楧栠⨯ਢ䡩杨∠㴠≈楧栢㬊ਯ⨠䱡牧攠獩穥⁦潲⁴桥⁤楳灬慹‪⼊≌慲来∠㴠≌慲来∻ਊ⼪⁃桥捫扯砠瑯⁬業楴⁴桥⁤楳灬慹⁴漠㈭㔠汩湥猠⨯ਢ䱩浩琠瑯′ⴵ⁬楮敳∠㴠≌業楴⁴漠㈭㔠汩湥猢㬊ਯ⨠乯瑩晩捡瑩潮⁐物潲楴礠䵯摥牡瑥‪⼊≍潤敲慴攢‽•䵯摥牡瑥∻ਊ⼪⁎潲浡氠獩穥⁦潲⁴桥⁤楳灬慹ਠ†乯瑩晩捡瑩潮⁐物潲楴礠乯牭慬‪⼊≎潲浡氢‽•乯牭慬∻ਊ⼪⁈潷⁣汥慲⁴桥⁤楳灬慹⁩猠⨯ਢ佰慣楴示∠㴠≏灡捩瑹㨢㬊ਯ⨠䱡扥氠景爠捯汵浮猠潦⁣潬潲⁷敬汳⁦潲⁶慲楯畳⁰物潲楴礠汥癥汳‪⼊≐物潲楴示 汯眠瑯⁨楧栩∠㴠≐物潲楴示 汯眠瑯⁨楧栩∻ਊ⼪⁌慢敬⁦潲⁢潸⁴漠獥汥捴⁳捲敥渠景爠摩獰污礠瑯⁵獥‪⼊≓捲敥渺∠㴠≓捲敥渺∻ਊ⼪⁌慢敬⁦潲⁰潰⁵瀠扯砠景爠獥汥捴楮朠瑨攠獩穥⁯映瑨攠摩獰污礠⨯ਢ卩穥㨢‽•卩穥㨢㬊ਯ⨠䄠獬楤攠敦晥捴‪⼊≓汩摥∠㴠≓汩摥∻ਊ⼪⁓浡汬⁳楺攠景爠瑨攠摩獰污礠⨯ਢ卭慬氢‽•卭慬氢㬊ਯ⨠䱡扥氠景爠牯眠潦⁣潬潲⁷敬汳⁦潲⁴桥⁴數琠敬敭敮琠潦⁴桥⁰汵杩渠⨯ਢ呥硴∠㴠≔數琢㬊ਯ⨠乯瑩晩捡瑩潮⁐物潲楴礠噥特⁌潷‪⼊≖敲礠䱯眢‽•噥特⁌潷∻ਊ
+/* Label for row of color wells for the background of the plugin */
+"Background" = "Background";
+
+/* How long a notification will stay on screen */
+"Duration:" = "Duration:";
+
+/* Label for the effect to use */
+"Effect:" = "Effect:";
+
+/* Notification Priority Emergency */
+"Emergency" = "Emergency";
+
+/* A fade effect */
+"Fade" = "Fade";
+
+/* Label for checkbox that says to do a floating icon */
+"Floating Icon" = "Floating Icon";
+
+/* Notification Priority High */
+"High" = "High";
+
+/* Large size for the display */
+"Large" = "Large";
+
+/* Checkbox to limit the display to 2-5 lines */
+"Limit to 2-5 lines" = "Limit to 2-5 lines";
+
+/* Notification Priority Moderate */
+"Moderate" = "Moderate";
+
+/* Normal size for the display
+   Notification Priority Normal */
+"Normal" = "Normal";
+
+/* How clear the display is */
+"Opacity:" = "Opacity:";
+
+/* Label for columns of color wells for various priority levels */
+"Priority: (low to high)" = "Priority: (low to high)";
+
+/* Label for box to select screen for display to use */
+"Screen:" = "Screen:";
+
+/* Label for pop up box for selecting the size of the display */
+"Size:" = "Size:";
+
+/* A slide effect */
+"Slide" = "Slide";
+
+/* Small size for the display */
+"Small" = "Small";
+
+/* Label for row of color wells for the text element of the plugin */
+"Text" = "Text";
+
+/* Notification Priority Very Low */
+"Very Low" = "Very Low";
+

@@ -16,5 +16,12 @@
 + (BOOL) hasNetworkClientEntitlement;
 + (BOOL) hasNetworkServerEntitlement;
 + (BOOL) isSandboxed;
+    
+@property (class, readonly, getter=isLionOrGreater) BOOL lionOrGreater;
+@property (class, readonly) BOOL hasSandboxEntitlement;
+@property (class, readonly) BOOL hasNetworkClientEntitlement;
+@property (class, readonly) BOOL hasNetworkServerEntitlement;
+@property (class, readonly, getter=isSandboxed) BOOL sandboxed;
+
 
 @end
