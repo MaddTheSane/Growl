@@ -9,7 +9,7 @@
 #import "GrowlAppleScriptSupport.h"
 
 //we define this ourselves
-enum { cMissingValue                 = 'msng'};
+NS_ENUM(OSType) { cMissingValue                 = 'msng'};
 
 @implementation NSData (GrowlAppleScriptSupport)
 

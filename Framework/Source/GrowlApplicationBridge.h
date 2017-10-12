@@ -54,7 +54,7 @@
    NSString *_appName;
    NSData *_appIconData;
    
-   id<GrowlApplicationBridgeDelegate> _delegate;
+   __unsafe_unretained id<GrowlApplicationBridgeDelegate> _delegate;
    
    @private   
    GrowlCommunicationAttempt *_registrationAttempt;
@@ -78,6 +78,8 @@
 
 +(GrowlApplicationBridge*)sharedBridge;
 
+@property (class, readonly, strong) GrowlApplicationBridge *sharedBridge;
+
 /*!
  *	@method isGrowlInstalled
  *	@abstract Detects whether Growl is installed.
@@ -94,6 +96,8 @@
  */
 + (BOOL) isGrowlRunning;
 
+@property (class, readonly, getter=isGrowlRunning) BOOL growlRunning;
+
 
 /*!
  *	@method isMistEnabled
@@ -104,6 +108,8 @@
  *    Mist and the user hasn't set the global mist enable key to false.
  */
 + (BOOL)isMistEnabled;
+
+@property (class, readonly, getter=isMistEnabled) BOOL mistEnabled;
 
 /*!
  *	@method setShouldUseBuiltInNotifications
@@ -121,6 +127,8 @@
  *	@result Returns NO if the developer opt-ed out of Mist, the default value is YES.
  */
 + (BOOL)shouldUseBuiltInNotifications;
+
+@property (class) BOOL shouldUseBuiltInNotifications;
 
 #pragma mark -
 
@@ -161,6 +169,8 @@
  *	@result The Growl delegate.
  */
 + (id<GrowlApplicationBridgeDelegate>) growlDelegate;
+
+@property (class, assign) id<GrowlApplicationBridgeDelegate> growlDelegate;
 
 #pragma mark -
 
@@ -314,6 +324,8 @@
  */
 + (BOOL) willRegisterWhenGrowlIsReady;
 
+@property (class) BOOL willRegisterWhenGrowlIsReady;
+
 #pragma mark -
 
 /*!	@method	registrationDictionaryFromDelegate
@@ -461,6 +473,8 @@
  *@since Growl.framework 1.4
  */
 + (BOOL) isGrowlURLSchemeAvailable;
+
+@property (class, readonly, getter=isGrowlURLSchemeAvailable) BOOL growlURLSchemeAvailable;
 
 /*!
  * @method openGrowlPreferences:

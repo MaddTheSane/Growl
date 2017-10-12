@@ -510,7 +510,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "genstrings -o ./SoundAction/en.lproj/ ./SoundAction/*.h ./SoundAction/*.m";
+			shellScript = "genstrings -o ./SoundAction/en.lproj/ ./SoundAction/*.h ./SoundAction/*.m\niconv -f UTF-16 -t UTF-8 SoundAction/en.lproj/Localizable.strings > SoundAction/en.lproj/Localizable2.strings\nmv SoundAction/en.lproj/Localizable2.strings SoundAction/en.lproj/Localizable.strings";
 		};
 /* End PBXShellScriptBuildPhase section */
 

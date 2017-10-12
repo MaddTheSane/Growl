@@ -572,7 +572,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "genstrings -s PRLocalizedString -o Prowl/en.lproj/ Prowl/*.m Prowl/*.h";
+			shellScript = "genstrings -s PRLocalizedString -o Prowl/en.lproj/ Prowl/*.m Prowl/*.h\niconv -f UTF-16 -t UTF-8 Prowl/en.lproj/Localizable.strings > Prowl/en.lproj/Localizable2.strings\nmv Prowl/en.lproj/Localizable2.strings Prowl/en.lproj/Localizable.strings";
 		};
 /* End PBXShellScriptBuildPhase section */
 

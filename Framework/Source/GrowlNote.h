@@ -17,7 +17,7 @@
  * Older versions will only do TimedOut and Clicked
  */
 
-enum GrowlNoteStatus {
+typedef NS_ENUM(int, GrowlNoteStatus) {
    GrowlNoteCanceled = -3,
    GrowlNoteNotDisplayed = -2,
    GrowlNoteClosed = -1,
@@ -26,7 +26,6 @@ enum GrowlNoteStatus {
    GrowlNoteActionClicked = 2,
    GrowlNoteOtherClicked = 3,
 };
-typedef enum GrowlNoteStatus GrowlNoteStatus;
 
 typedef void(^GrowlNoteStatusUpdateBlock)(GrowlNoteStatus status, GrowlNote *note);
 
@@ -55,7 +54,7 @@ typedef void(^GrowlNoteStatusUpdateBlock)(GrowlNoteStatus status, GrowlNote *not
    
    NSDictionary *_otherKeysDict;
    
-   id<GrowlNoteDelegate> _delegate;
+   __unsafe_unretained id<GrowlNoteDelegate> _delegate;
    GrowlNoteStatusUpdateBlock _statusUpdateBlock;
    
    @private

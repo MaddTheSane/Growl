@@ -498,7 +498,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "genstrings -o ./Boxcar/en.lproj/ ./Boxcar/*.h ./Boxcar/*.m";
+			shellScript = "genstrings -o ./Boxcar/en.lproj/ ./Boxcar/*.h ./Boxcar/*.m\niconv -f UTF-16 -t UTF-8 Boxcar/en.lproj/Localizable.strings > Boxcar/en.lproj/Localizable2.strings\nmv Boxcar/en.lproj/Localizable2.strings Boxcar/en.lproj/Localizable.strings";
 		};
 /* End PBXShellScriptBuildPhase section */
 

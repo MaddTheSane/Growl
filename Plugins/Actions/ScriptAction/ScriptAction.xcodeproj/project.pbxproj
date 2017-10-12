@@ -238,7 +238,7 @@
 				BC0D52EB16238EC50027B326 /* Nano.growlView */,
 				BC0D52ED16238EC50027B326 /* MusicVideo.growlView */,
 				BC0D52EF16238EC50027B326 /* SMS.growlView */,
-				BC0D52F116238EC50027B326 /* Unit tests.octest */,
+				BC0D52F116238EC50027B326 /* Unit tests.xctest */,
 				BC0D52F316238EC50027B326 /* com.company.application.GNTPClientService.xpc */,
 			);
 			name = Products;
@@ -401,10 +401,10 @@
 			remoteRef = BC0D52EE16238EC50027B326 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		BC0D52F116238EC50027B326 /* Unit tests.octest */ = {
+		BC0D52F116238EC50027B326 /* Unit tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "Unit tests.octest";
+			path = "Unit tests.xctest";
 			remoteRef = BC0D52F016238EC50027B326 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -446,7 +446,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "genstrings -o ./ScriptAction/en.lproj/ ./ScriptAction/*.h ./ScriptAction/*.m";
+			shellScript = "genstrings -o ./ScriptAction/en.lproj/ ./ScriptAction/*.h ./ScriptAction/*.m\niconv -f UTF-16 -t UTF-8 ScriptAction/en.lproj/Localizable.strings > ScriptAction/en.lproj/Localizable2.strings\nmv ScriptAction/en.lproj/Localizable2.strings ScriptAction/en.lproj/Localizable.strings";
 		};
 /* End PBXShellScriptBuildPhase section */
 

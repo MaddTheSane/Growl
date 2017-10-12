@@ -499,7 +499,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "genstrings -o ./MailMe/en.lproj/ ./MailMe/*.h ./MailMe/*.m";
+			shellScript = "genstrings -o ./MailMe/en.lproj/ ./MailMe/*.h ./MailMe/*.m\niconv -f UTF-16 -t UTF-8 MailMe/en.lproj/Localizable.strings > MailMe/en.lproj/Localizable2.strings\nmv MailMe/en.lproj/Localizable2.strings MailMe/en.lproj/Localizable.strings";
 		};
 /* End PBXShellScriptBuildPhase section */
 
