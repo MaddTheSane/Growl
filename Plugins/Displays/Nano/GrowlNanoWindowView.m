@@ -150,29 +150,22 @@ void addRoundedBottomToPath(CGContextRef context, CGRect rect, CGFloat radius) {
 		effect = [[[self configurationDict] valueForKey:Nano_EFFECT_PREF] intValue];
 	}
 	if (effect == Nano_EFFECT_SLIDE) {
-		if (CGLayerCreateWithContext)
-			imageRect.origin.y = 0.0;
+		imageRect.origin.y = 0.0;
 	} else if (effect == Nano_EFFECT_WIPE) {
 		rect.size.height -= imageRect.origin.y;
 		imageRect.size.height -= imageRect.origin.y;
-		if (!CGLayerCreateWithContext)
-			imageRect.origin.y = 0.0;
 	}
 
-	if (CGLayerCreateWithContext) {
-		CGRect cgRect;
-		cgRect.origin.x = imageRect.origin.x;
-		cgRect.origin.y = imageRect.origin.y;
-		cgRect.size.width = rect.size.width;
-		if (effect == Nano_EFFECT_WIPE) {
-			cgRect.size.height = rect.size.height;
-			CGContextClipToRect(cgContext, cgRect);
-		}
-		cgRect.size.height = bounds.size.height;
-		CGContextDrawLayerInRect(cgContext, cgRect, layer);
-	} else {
-		[cache drawInRect:rect fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+	CGRect cgRect;
+	cgRect.origin.x = imageRect.origin.x;
+	cgRect.origin.y = imageRect.origin.y;
+	cgRect.size.width = rect.size.width;
+	if (effect == Nano_EFFECT_WIPE) {
+		cgRect.size.height = rect.size.height;
+		CGContextClipToRect(cgContext, cgRect);
 	}
+	cgRect.size.height = bounds.size.height;
+	CGContextDrawLayerInRect(cgContext, cgRect, layer);
 }
 
 - (void) setIcon:(NSImage *)anIcon {

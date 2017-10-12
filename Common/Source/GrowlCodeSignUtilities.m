@@ -63,7 +63,7 @@
     {
         CFDictionaryRef errDict = CFErrorCopyUserInfo(errors);
         NSLog(@"SecRequirementCreateWithStringAndErrors failure: %@", (NSDictionary*)CFBridgingRelease(errDict));
-        CFRelease(errors), errors = NULL;
+        CFRelease(errors); errors = NULL;
     }
     if(!result)
         NSLog(@"Entitlement NOT present: %@", entitlement);

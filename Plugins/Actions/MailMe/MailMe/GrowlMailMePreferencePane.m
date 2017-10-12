@@ -47,15 +47,15 @@
 
 @implementation GrowlMailMePreferencePane
 
-@synthesize serverAddress;
-@synthesize serverPorts;
-@synthesize serverTlsMode;
-@synthesize serverAuthFlag;
-@synthesize serverAuthUsername;
-@synthesize serverAuthPassword;
-@synthesize messageFrom;
-@synthesize messageTo;
-@synthesize messageSubject;
+@dynamic serverAddress;
+@dynamic serverPorts;
+@dynamic serverTlsMode;
+@dynamic serverAuthFlag;
+@dynamic serverAuthUsername;
+@dynamic serverAuthPassword;
+@dynamic messageFrom;
+@dynamic messageTo;
+@dynamic messageSubject;
 
 @synthesize fromLabel;
 @synthesize toLabel;
