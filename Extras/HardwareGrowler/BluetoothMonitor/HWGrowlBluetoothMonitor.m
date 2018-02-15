@@ -78,11 +78,12 @@
     NSString *imageName = (connected ? @"Bluetooth-On" : @"Bluetooth-Off");
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"tif"];
     NSData *iconData = [NSData dataWithContentsOfFile:imagePath];
+	NSImage *icon = [NSImage imageNamed:imageName];
     
 	[delegate notifyWithName:connected ? @"BluetoothConnected" : @"BluetoothDisconnected"
 							 title:title
 					 description:name
-							  icon:iconData
+							  icon:[icon TIFFRepresentation]
 			  identifierString:name
 				  contextString:nil
 							plugin:self];
