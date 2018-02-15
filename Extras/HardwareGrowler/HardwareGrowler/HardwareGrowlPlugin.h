@@ -8,18 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol HWGrowlPluginProtocol;
+@protocol HWGrowlPluginNotifierProtocol;
+
 @protocol HWGrowlPluginControllerProtocol <NSObject>
 @required
 -(void)notifyWithName:(NSString*)name 
-					 title:(NSString*)title
-			 description:(NSString*)description
-					  icon:(NSData*)iconData
-	  identifierString:(NSString*)identifier
-		  contextString:(NSString*)context
-					plugin:(id)plugin;
+				title:(NSString*)title
+		  description:(NSString*)description
+				 icon:(NSData*)iconData
+	 identifierString:(NSString*)identifier
+		contextString:(NSString*)context
+			   plugin:(id<HWGrowlPluginProtocol, HWGrowlPluginNotifierProtocol>)plugin;
 
 -(BOOL)onLaunchEnabled;
--(BOOL)pluginDisabled:(id)plugin;
+-(BOOL)pluginDisabled:(id<HWGrowlPluginProtocol, HWGrowlPluginNotifierProtocol>)plugin;
 
 @end
 
@@ -40,10 +43,10 @@
 
 @protocol HWGrowlPluginNotifierProtocol <NSObject>
 @required
--(NSArray*)noteNames;
--(NSDictionary*)localizedNames;
--(NSDictionary*)noteDescriptions;
--(NSArray*)defaultNotifications;
+-(NSArray<NSString*>*)noteNames;
+-(NSDictionary<NSString*,NSString*>*)localizedNames;
+-(NSDictionary<NSString*,NSString*>*)noteDescriptions;
+-(NSArray<NSString*>*)defaultNotifications;
 
 @optional
 -(void)postRegistrationInit;

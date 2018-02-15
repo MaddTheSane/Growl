@@ -35,7 +35,7 @@
         NSBitmapImageRep *bitmapRep = [representations objectAtIndex:0U];
 
 		_mountIconData = [bitmapRep representationUsingType: NSPNGFileType
-                                                 properties: nil];
+												 properties: @{}];
 	});
 	return _mountIconData;
 }
@@ -55,7 +55,7 @@
             CGImageRef iconRef = [icon CGImageForProposedRect:nil context:nil hints:nil];
             NSBitmapImageRep *bitmapRep = [[[NSBitmapImageRep alloc] initWithCGImage:iconRef] autorelease];
 			self.iconData = [bitmapRep representationUsingType: NSPNGFileType
-                                                      properties: nil];
+                                                      properties: @{}];
 		} else {
 			self.iconData = [VolumeInfo mountIconData];
 		}
@@ -72,7 +72,7 @@
 			NSSize iconSize = [icon size];
 			//Also get the standard Eject icon.
 			NSImage *ejectIcon = [VolumeInfo ejectIconImage];
-			[ejectIcon setScalesWhenResized:NO]; //Use the high-res rep instead.
+			//[ejectIcon setScalesWhenResized:NO]; //Use the high-res rep instead.
 			NSSize ejectIconSize = [ejectIcon size];
 			
 			//Badge the volume icon with the Eject icon. This is what we'll pass off te Growl.
@@ -87,11 +87,11 @@
 			//For some reason, passing [icon TIFFRepresentation] only passes the unbadged volume icon to Growl, even though writing the same TIFF data out to a file and opening it in Preview does show the badge. If anybody can figure that out, you're welcome to do so. Until then:
 			//We get a NSBIR for the current focused view (the image), and make PNG data from it. (There is no reason why this could not be TIFF if we wanted it to be. I just generally prefer PNG. —boredzo)
 			NSBitmapImageRep *imageRep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:(NSRect){ NSZeroPoint, iconSize }] autorelease];
-			self.iconData = [imageRep representationUsingType:NSPNGFileType properties:nil];
+			self.iconData = [imageRep representationUsingType:NSPNGFileType properties:@{}];
 			
 			[icon unlockFocus];
 		} else {
-			self.iconData = [[[[VolumeInfo ejectIconImage] representations] objectAtIndex:0U]representationUsingType:NSPNGFileType properties:nil];
+			self.iconData = [(NSBitmapImageRep*)[[[VolumeInfo ejectIconImage] representations] objectAtIndex:0U]representationUsingType:NSPNGFileType properties:@{}];
 		}
 	}
 	

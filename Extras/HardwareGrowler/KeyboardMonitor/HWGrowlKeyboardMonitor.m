@@ -128,19 +128,19 @@ self.NAME ## Flag = NAME;
 		name = newState ? @"CapsLockOn" : @"CapsLockOff";
 		title = newState ? NSLocalizedString(@"Caps Lock On", @"") : NSLocalizedString(@"Caps Lock Off", @"");
 		identifier = @"HWGrowlCaps";
-		imageName = newState ? @"Capster-CapsLock-On" : @"Capster-CapsLock-Off";
+		imageName = newState ? @"Capster/CapsLock-On" : @"Capster/CapsLock-Off";
 	}else if ([type isEqualToString:@"fn"]){
 		enabledKey = @"fnkey";
 		name = newState ? @"FNPressed" : @"FNReleased";
 		title = newState ? NSLocalizedString(@"FN Key Pressed", @"") : NSLocalizedString(@"FN Key Released", @"");
 		identifier = @"HWGrowlFNKey";
-		imageName = newState ? @"Capster-FnKey-On" : @"Capster-FnKey-Off";
+		imageName = newState ? @"Capster/FnKey-On" : @"Capster/FnKey-Off";
 	}else if ([type isEqualToString:@"shift"]){
 		enabledKey = @"shiftkey";
 		name = newState ? @"ShiftPressed" : @"ShiftReleased";
 		title = newState ? NSLocalizedString(@"Shift Key Pressed", @"") : NSLocalizedString(@"Shift Key Released", @"");
 		identifier = @"HWGrowlShiftKey";
-		imageName = newState ? @"Capster-Shift-On" : @"Capster-Shift-Off";
+		imageName = newState ? @"Capster/Shift-On" : @"Capster/Shift-Off";
 	}else {
 		return;
 	}
@@ -150,8 +150,8 @@ self.NAME ## Flag = NAME;
 	if(![enabled boolValue])
 		return;
 	
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"tif"];
-    NSData *iconData = [NSData dataWithContentsOfFile:imagePath];
+	NSImage *icon = [NSImage imageNamed:imageName];
+	NSData *iconData = [icon TIFFRepresentation];
     [delegate notifyWithName:name
                        title:title
                  description:nil

@@ -134,8 +134,8 @@
 		else
 			description = NSLocalizedString(@"First backup, or no previous backup found in the system log", @"");
         
-        NSString *iconPath = [[NSBundle mainBundle] resourceNamed:@"TimeMachine-On" ofType:@"tif"];
-        NSData *iconData = [NSData dataWithContentsOfFile:iconPath];
+        NSImage *icon = [NSImage imageNamed:@"TimeMachine/On"];
+        NSData *iconData = [icon TIFFRepresentation];
 		[blockSelf->delegate notifyWithName:@"TimeMachineStart"
 												title:NSLocalizedString(@"Time Machine started", @"") 
 										description:description
@@ -204,8 +204,8 @@
 				if (postGrowlNotifications) {
 					dispatch_async(dispatch_get_main_queue(), ^{
 						NSString *timeString = [blockSelf stringWithTimeInterval:[blockSelf->lastEndTime timeIntervalSinceDate:blockSelf->lastStartTime]];
-                        NSString *iconPath = [[NSBundle mainBundle] resourceNamed:@"TimeMachine-Off" ofType:@"tif"];
-                        NSData *iconData = [NSData dataWithContentsOfFile:iconPath];
+                        NSImage *icon = [NSImage imageNamed:@"TimeMachine/Off"];
+                        NSData *iconData = [icon TIFFRepresentation];
                         [blockSelf->delegate notifyWithName:@"TimeMachineFinish"
 																title:NSLocalizedString(@"Time Machine finished", @"")
 														description:[NSString stringWithFormat:NSLocalizedString(@"Back-up took %@", @""), timeString]
@@ -232,8 +232,8 @@
 							description = [NSString stringWithFormat:NSLocalizedString(@"Failed after %@", @""), timeString];
 						else
 							description = [NSString stringWithFormat:NSLocalizedString(@"Canceled after %@", @""), timeString];
-                        NSString *iconPath = [[NSBundle mainBundle] resourceNamed:@"TimeMachine-Failed" ofType:@"tif"];
-                        NSData *iconData = [NSData dataWithContentsOfFile:iconPath];
+                        NSImage *icon = [NSImage imageNamed:@"TimeMachine/Failed"];
+                        NSData *iconData = [icon TIFFRepresentation];
 
 						[blockSelf->delegate notifyWithName:wasFailure ? @"TimeMachineFailed" : @"TimeMachineCanceled"
 																title:wasFailure ? NSLocalizedString(@"Time Machine Failed", @"") : NSLocalizedString(@"Time Machine Canceled", @"")

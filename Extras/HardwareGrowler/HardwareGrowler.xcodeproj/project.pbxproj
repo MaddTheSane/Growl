@@ -588,8 +588,7 @@
 				BC523C30155568A000548427 /* HWGrowlUSBMonitor.m */,
 				BC523C251555686000548427 /* Supporting Files */,
 			);
-			name = USBMonitor;
-			path = ../USBMonitor;
+			path = USBMonitor;
 			sourceTree = "<group>";
 		};
 		BC523C251555686000548427 /* Supporting Files */ = {
@@ -610,8 +609,7 @@
 				BC5BF816157658810088443E /* KeyboardMonitorPrefs.xib */,
 				BC5BF7EE15752CEF0088443E /* Supporting Files */,
 			);
-			name = KeyboardMonitor;
-			path = ../KeyboardMonitor;
+			path = KeyboardMonitor;
 			sourceTree = "<group>";
 		};
 		BC5BF7EE15752CEF0088443E /* Supporting Files */ = {
@@ -631,8 +629,7 @@
 				BC75526B1565291400CB0542 /* HWGrowlThunderboltMonitor.m */,
 				BC755251156528AA00CB0542 /* Supporting Files */,
 			);
-			name = ThunderboltMonitor;
-			path = ../ThunderboltMonitor;
+			path = ThunderboltMonitor;
 			sourceTree = "<group>";
 		};
 		BC755251156528AA00CB0542 /* Supporting Files */ = {
@@ -652,8 +649,7 @@
 				BCA26B6B155585FA009C5ABC /* HWGrowlBluetoothMonitor.m */,
 				BCA26B60155585C0009C5ABC /* Supporting Files */,
 			);
-			name = BluetoothMonitor;
-			path = ../BluetoothMonitor;
+			path = BluetoothMonitor;
 			sourceTree = "<group>";
 		};
 		BCA26B60155585C0009C5ABC /* Supporting Files */ = {
@@ -673,8 +669,7 @@
 				BCA26BA41555B46F009C5ABC /* HWGrowlFirewireMonitor.m */,
 				BCA26B8A1555B3F5009C5ABC /* Supporting Files */,
 			);
-			name = FirewireMonitor;
-			path = ../FirewireMonitor;
+			path = FirewireMonitor;
 			sourceTree = "<group>";
 		};
 		BCA26B8A1555B3F5009C5ABC /* Supporting Files */ = {
@@ -695,8 +690,7 @@
 				BC5ADEA015643AFD0042C168 /* PowerMonitorPrefs.xib */,
 				BCA26BB61555BB1B009C5ABC /* Supporting Files */,
 			);
-			name = PowerMonitor;
-			path = ../PowerMonitor;
+			path = PowerMonitor;
 			sourceTree = "<group>";
 		};
 		BCA26BB61555BB1B009C5ABC /* Supporting Files */ = {
@@ -874,7 +868,7 @@
 				BCECA36A1552D24C00F49280 /* GrowlNetworkUtilities.m */,
 				BCB8074B1551A6EA0088C69A /* Supporting Files */,
 			);
-			name = NetworkMonitor;
+			path = NetworkMonitor;
 			sourceTree = "<group>";
 		};
 		BCB8074B1551A6EA0088C69A /* Supporting Files */ = {
@@ -903,7 +897,6 @@
 				BCE83C6715804D2C005570DD /* PhoneMonitor */,
 			);
 			name = Plugins;
-			path = NetworkMonitor;
 			sourceTree = "<group>";
 		};
 		BCB807701551AB500088C69A /* External */ = {
@@ -944,8 +937,7 @@
 				BCE83C7515804F8B005570DD /* HWGrowlPhoneMonitor.m */,
 				BCE83C6815804D2C005570DD /* Supporting Files */,
 			);
-			name = PhoneMonitor;
-			path = ../PhoneMonitor;
+			path = PhoneMonitor;
 			sourceTree = "<group>";
 		};
 		BCE83C6815804D2C005570DD /* Supporting Files */ = {
@@ -967,8 +959,7 @@
 				BC7300AA1554594900CCCA74 /* VolumeMonitorPrefs.xib */,
 				BCECA390155322D200F49280 /* Supporting Files */,
 			);
-			name = VolumeMonitor;
-			path = ../VolumeMonitor;
+			path = VolumeMonitor;
 			sourceTree = "<group>";
 		};
 		BCECA390155322D200F49280 /* Supporting Files */ = {
@@ -988,8 +979,7 @@
 				BCF6237B15687B2E00AB4676 /* HWGrowlTimeMachineMonitor.m */,
 				BCF6236C156878CC00AB4676 /* Supporting Files */,
 			);
-			name = TimeMachineMonitor;
-			path = ../TimeMachineMonitor;
+			path = TimeMachineMonitor;
 			sourceTree = "<group>";
 		};
 		BCF6236C156878CC00AB4676 /* Supporting Files */ = {

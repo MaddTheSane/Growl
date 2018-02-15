@@ -420,34 +420,34 @@
 			switch (currentSource) {
 				case HGACPower:
 					if(chargingOrFinishing)
-						imageName = @"Power-Charging";
+						imageName = @"Power/Charging";
 					else
-						imageName = @"Power-Plugged";
+						imageName = @"Power/Plugged";
 					break;
 				case HGBatteryPower:
 				case HGUPSPower:
 					if(percentage >= 0){
 						CGFloat adjusted = roundf((CGFloat)percentage / 10.0f);
-						imageName = [NSString stringWithFormat:@"Power-%ld0", (NSInteger)adjusted];
+						imageName = [NSString stringWithFormat:@"Power/%ld0", (NSInteger)adjusted];
 						if(adjusted == 0)
-							imageName = @"Power-0";
+							imageName = @"Power/0";
 					}
 					else
 					{
-						imageName = @"Power-NoBattery";
+						imageName = @"Power/NoBattery";
 					}
 					break;
 				case HGUnknownPower:
 				default:
 					//Shouldn't get to either of these
-					imageName = @"Power-BatteryFailure";
+					imageName = @"Power/BatteryFailure";
 					break;
 			}
 			
 			@autoreleasepool
 			{
-				NSString *imagePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"tif"];
-            NSData *iconData = [NSData dataWithContentsOfFile:imagePath];
+				NSImage *image = [NSImage imageNamed:imageName];
+            NSData *iconData = [image TIFFRepresentation];
             
             [delegate notifyWithName:name
                                title:title

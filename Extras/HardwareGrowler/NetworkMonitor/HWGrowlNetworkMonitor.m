@@ -212,8 +212,8 @@ typedef enum {
 }
 
 -(void)airportDisconnected:(NSString*)networkName {
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"Network-Wifi-Off" ofType:@"tif"];
-    NSData *iconData = [NSData dataWithContentsOfFile:imagePath];
+    NSImage *image = [NSImage imageNamed:@"Network/Wifi/Off"];
+    NSData *iconData = [image TIFFRepresentation];
     [delegate notifyWithName:@"AirportDisconnected"
 							 title:NSLocalizedString(@"AirPort Disconnected", @"")
 					 description:[NSString stringWithFormat:NSLocalizedString(@"Left network %@.", @""), networkName]
@@ -238,8 +238,8 @@ typedef enum {
 									 bssid];
 	
     
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"Network-Wifi-4" ofType:@"tif"];
-    NSData *iconData = [NSData dataWithContentsOfFile:imagePath];
+    NSImage *image = [NSImage imageNamed:@"Network/Wifi/4"];
+    NSData *iconData = [image TIFFRepresentation];
 
 	[delegate notifyWithName:@"AirportConnected"
 							 title:NSLocalizedString(@"AirPort Connected", @"")
@@ -268,16 +268,16 @@ typedef enum {
 								 NSLocalizedString(@"Interface:\t%@\nMedia:\t%@", "The first %@ will be replaced with the interface (en0, en1, etc) second %@ will be replaced by a description of the Ethernet media such as '100BT/full-duplex'"),
 								 interfaceString,
 								 [self getMediaForInterface:interfaceString]];
-		imageName = @"Network-Ethernet-On";
+		imageName = @"Network/Ethernet/On";
 	} else if (!newActive && oldActive) {
 		noteName = @"NetworkLinkDown";
 		noteTitle = NSLocalizedString(@"Network Link Down", @"");
 		noteDescription = [NSString stringWithFormat:NSLocalizedString(@"Interface:\t%@", nil), interfaceString];
-		imageName = @"Network-Ethernet-Off";
+		imageName = @"Network/Ethernet/Off";
 	}
 	
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"tif"];
-    NSData *iconData = [NSData dataWithContentsOfFile:imagePath];
+    NSImage *image = [NSImage imageNamed:imageName];
+    NSData *iconData = [image TIFFRepresentation];
    
 	if(noteName){
 		[delegate notifyWithName:noteName
@@ -367,13 +367,13 @@ typedef enum {
 	NSString *imageName = nil;
 	if([combined isEqualToString:@""]) {
 		combined = nil;
-		imageName = @"Network-Generic-Off";
+		imageName = @"Network/Generic/Off";
 	}else{
-		imageName = @"Network-Generic-On";
+		imageName = @"Network/Generic/On";
 	}
 
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"tif"];
-    NSData *iconData = [NSData dataWithContentsOfFile:imagePath];
+    NSImage *image = [NSImage imageNamed:imageName];
+    NSData *iconData = [image TIFFRepresentation];
 	[delegate notifyWithName:@"IPAddressChange"
 							 title:NSLocalizedString(@"IP Addresses Updated", @"")
 					 description:combined ? combined : NSLocalizedString(@"No routable IP addresses", @"")
